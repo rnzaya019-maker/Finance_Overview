@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaya's Financial Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #151920;
+  --surface2: #1c222d;
+  --surface3: #232a38;
+  --border: #2a3244;
+  --text: #e8ecf4;
+  --text2: #9aa3b8;
+  --text3: #6b7590;
+  --red: #ef4444;
+  --red-dim: #7f1d1d;
+  --orange: #f59e0b;
+  --orange-dim: #78350f;
+  --green: #22c55e;
+  --green-dim: #14532d;
+  --blue: #3b82f6;
+  --blue-dim: #1e3a5f;
+  --purple: #a78bfa;
+  --purple-dim: #3b2d6b;
+  --cyan: #06b6d4;
+  --accent: #f59e0b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.mono { font-family: 'Space Mono', monospace; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h1 span { color: var(--accent); }
+
+.date-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text2);
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 28px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s;
+}
+
+.tab:hover { color: var(--text); background: var(--surface2); }
+.tab.active { background: var(--accent); color: #000; font-weight: 600; }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* CARDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.card-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+
+.text-red { color: var(--red); }
+.text-orange { color: var(--orange); }
+.text-green { color: var(--green); }
+.text-blue { color: var(--blue); }
+.text-purple { color: var(--purple); }
+.text-cyan { color: var(--cyan); }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.badge-red { background: var(--red-dim); color: var(--red); }
+.badge-orange { background: var(--orange-dim); color: var(--orange); }
+.badge-green { background: var(--green-dim); color: var(--green); }
+.badge-blue { background: var(--blue-dim); color: var(--blue); }
+.badge-purple { background: var(--purple-dim); color: var(--purple); }
+
+/* TABLES */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tr:last-child td { border-bottom: none; }
+
+.highlight-row { background: var(--surface2); }
+
+/* PROGRESS BARS */
+.progress-wrap { margin-bottom: 16px; }
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--surface3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .6s ease;
+}
+
+/* SECTIONS */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.section { margin-bottom: 32px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid;
+}
+
+.timeline-month {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+
+.timeline-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.timeline-content h4 { font-size: 15px; margin-bottom: 6px; }
+.timeline-content p { font-size: 13px; color: var(--text2); }
+
+/* CALLOUT */
+.callout {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid;
+}
+
+.callout-red { background: var(--red-dim); border-color: var(--red); }
+.callout-orange { background: var(--orange-dim); border-color: var(--orange); }
+.callout-green { background: var(--green-dim); border-color: var(--green); }
+.callout-blue { background: var(--blue-dim); border-color: var(--blue); }
+
+.callout h4 { font-size: 15px; margin-bottom: 6px; }
+.callout p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* SCENARIO TOGGLE */
+.scenario-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.scenario-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.scenario-btn:hover { border-color: var(--accent); color: var(--text); }
+.scenario-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+/* CHECKLIST */
+.checklist-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.checklist-item:hover { border-color: var(--accent); }
+
+.check-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  margin-top: 1px;
+}
+
+.checklist-item.checked .check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.checklist-item.checked .check-box::after {
+  content: '✓';
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.check-text { font-size: 14px; }
+.check-text .sub { display: block; font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+/* BAR CHART */
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 200px; padding: 0 8px; }
+
+.bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+.bar {
+  width: 100%;
+  max-width: 40px;
+  border-radius: 4px 4px 0 0;
+  transition: height .4s ease;
+  position: relative;
+}
+
+.bar-label {
+  font-size: 10px;
+  color: var(--text3);
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+}
+
+.bar-value {
+  font-size: 10px;
+  color: var(--text2);
+  font-family: 'Space Mono', monospace;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn .4s ease forwards; }
+
+/* FULL-WIDTH CARD */
+.full-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.full-card h3 { font-size: 16px; margin-bottom: 16px; }
+
+/* STACKED BAR */
+.stacked-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.stacked-label {
+  font-size: 12px;
+  width: 40px;
+  color: var(--text3);
+  font-family: 'Space Mono', monospace;
+  flex-shrink: 0;
+}
+
+.stacked-bar {
+  flex: 1;
+  height: 28px;
+  background: var(--surface3);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+}
+
+.stacked-segment {
+  height: 100%;
+  transition: width .5s ease;
+  position: relative;
+}
+
+.stacked-total {
+  font-size: 12px;
+  color: var(--text2);
+  font-family: 'Space Mono', monospace;
+  width: 60px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+/* BUSINESS CARD */
+.biz-option {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+  transition: all .2s;
+}
+
+.biz-option:hover { border-color: var(--accent); }
+
+.biz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.biz-header h4 { font-size: 16px; }
+.biz-pros { list-style: none; }
+.biz-pros li { font-size: 13px; color: var(--text2); padding: 3px 0; padding-left: 18px; position: relative; }
+.biz-pros li::before { content: '→'; position: absolute; left: 0; color: var(--green); }
+
+/* SBA DETAILS */
+.sba-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.sba-card h4 { font-size: 15px; margin-bottom: 8px; }
+.sba-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.sba-detail { display: flex; gap: 8px; font-size: 13px; margin-top: 6px; }
+.sba-detail span:first-child { color: var(--text3); min-width: 100px; }
+
+.scroll-hint {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div>
+      <h1>Zaya's <span>Financial Command Center</span></h1>
+      <p style="color: var(--text2); font-size: 14px; margin-top: 4px;">From survival mode → building mode</p>
+    </div>
+    <div class="date-badge mono">As of 02/18/2026</div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="snapshot">Snapshot</button>
+    <button class="tab" data-tab="debts">Debt Map</button>
+    <button class="tab" data-tab="projections">Projections</button>
+    <button class="tab" data-tab="business">Business Plan</button>
+    <button class="tab" data-tab="action">Action Plan</button>
+    <button class="tab" data-tab="housing">Housing</button>
+  </div>
+
+  <!-- ============ SNAPSHOT ============ -->
+  <div class="panel active" id="snapshot">
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-label">Monthly Income</div>
+        <div class="card-value text-green mono">$3,092</div>
+        <div class="card-sub">Day job + Sunday nails</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Monthly Obligations</div>
+        <div class="card-value text-red mono">$5,233</div>
+        <div class="card-sub">All bills + debt payments</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Monthly Shortfall</div>
+        <div class="card-value text-orange mono">-$2,141</div>
+        <div class="card-sub">You're going into debt each month</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Debt</div>
+        <div class="card-value text-red mono">$13,814</div>
+        <div class="card-sub">Excl. boss loan & car lease</div>
+      </div>
+    </div>
+
+    <div class="callout callout-red">
+      <h4>⚠ The Core Problem</h4>
+      <p>You're spending ~$2,100 more than you earn every month. This means every single month pushes you deeper into debt. No amount of budgeting tricks will fix this — you need either <strong>more income</strong>, <strong>less rent</strong>, or both. The math is simple but the path out requires bold moves.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="full-card">
+        <h3>Income Breakdown</h3>
+        <div class="progress-wrap">
+          <div class="progress-header">
+            <span>Day Job (M–W, 9–5, $22/hr)</span>
+            <span class="mono text-green">$2,112/mo</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 68%; background: var(--green);"></div></div>
+          <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">24 hrs/wk × $22 × 4 weeks (before tax ~$1,830 take-home est.)</div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header">
+            <span>Sunday Nails (tips + hourly)</span>
+            <span class="mono text-green">$220/wk → $880/mo</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 28%; background: var(--cyan);"></div></div>
+          <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">$100 tips + ~$120 hourly (8hrs × $15)</div>
+        </div>
+        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; display: flex; justify-content: space-between;">
+          <span style="font-size: 14px; font-weight: 600;">Estimated Take-Home</span>
+          <span class="mono text-green" style="font-size: 16px; font-weight: 700;">~$2,710 – $3,092</span>
+        </div>
+        <div style="font-size: 12px; color: var(--text3); margin-top: 4px;">Range accounts for taxes on W-2 income; nail tips may be cash</div>
+      </div>
+
+      <div class="full-card">
+        <h3>Monthly Outflow (Fixed)</h3>
+        <div class="progress-wrap">
+          <div class="progress-header"><span>Rent</span><span class="mono">$2,200</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 42%; background: var(--red);"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span>Debt Payments</span><span class="mono">$763</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 15%; background: var(--orange);"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span>Car (Lease + Insurance + Chris)</span><span class="mono">$1,173</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 22%; background: var(--purple);"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span>Bills (Verizon + Xcel)</span><span class="mono">$405</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 8%; background: var(--blue);"></div></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-header"><span>Other Expenses</span><span class="mono">$1,000–1,500</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 24%; background: var(--text3);"></div></div>
+        </div>
+        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; display: flex; justify-content: space-between;">
+          <span style="font-size: 14px; font-weight: 600;">Total Outflow</span>
+          <span class="mono text-red" style="font-size: 16px; font-weight: 700;">$5,541 – $6,041</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-orange">
+      <h4>💡 Rent is 71% of your income</h4>
+      <p>The general rule is rent should be ≤30% of income. At $2,200/mo rent + $300 security deposit installment, housing alone is $2,500. Your entire day job paycheck goes to rent. This is unsustainable. Moving to a $1,200–$1,500 place saves $700–$1,000/month — which alone could eliminate your monthly shortfall.</p>
+    </div>
+  </div>
+
+  <!-- ============ DEBT MAP ============ -->
+  <div class="panel" id="debts">
+    <div class="section-title"><div class="icon" style="background: var(--red-dim);">🔥</div> Debt Priority Map</div>
+    
+    <div class="callout callout-red" style="margin-bottom: 24px;">
+      <h4>Debt Avalanche Strategy</h4>
+      <p>Attack highest-interest debts first. Your credit cards at 27–30% APR are emergencies. The 0% interest debts can wait. Every dollar to high-interest debt saves you real money.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Debt</th>
+            <th>Balance</th>
+            <th>Rate</th>
+            <th>Payment</th>
+            <th>Due</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td><span class="badge badge-red">URGENT</span></td>
+            <td>Boss Loan</td>
+            <td class="mono">$2,000</td>
+            <td class="mono">0%</td>
+            <td class="mono">$2,000</td>
+            <td>02/28</td>
+            <td class="text-red">Due in 10 days — full amount</td>
+          </tr>
+          <tr class="highlight-row">
+            <td><span class="badge badge-red">🔥 #1</span></td>
+            <td>Affirm Loan</td>
+            <td class="mono">$395</td>
+            <td class="mono text-red">29.99%</td>
+            <td class="mono">$36</td>
+            <td>15th</td>
+            <td>Smallest high-interest — kill first</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">🔥 #2</span></td>
+            <td>Capital One (small)</td>
+            <td class="mono">$212</td>
+            <td class="mono text-red">29.99%</td>
+            <td class="mono">$50</td>
+            <td>10th</td>
+            <td>Second smallest — quick win</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">#3</span></td>
+            <td>Capital One (large)</td>
+            <td class="mono">$1,910</td>
+            <td class="mono text-red">28.74%</td>
+            <td class="mono">$67</td>
+            <td>12th</td>
+            <td>Biggest high-interest balance</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">#4</span></td>
+            <td>Discover</td>
+            <td class="mono">$763</td>
+            <td class="mono text-orange">26.49%</td>
+            <td class="mono">$140</td>
+            <td>9th</td>
+            <td>High rate, moderate balance</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">#5</span></td>
+            <td>$3,500 Loan</td>
+            <td class="mono">$3,500</td>
+            <td class="mono">4%</td>
+            <td class="mono">$140</td>
+            <td>10th</td>
+            <td>Low rate — pay minimum only</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">#6</span></td>
+            <td>Collection</td>
+            <td class="mono">$1,390</td>
+            <td class="mono">0%</td>
+            <td class="mono">$278</td>
+            <td>Biweekly</td>
+            <td>Arranged — keep on schedule</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">#7</span></td>
+            <td>Wells Fargo Flex</td>
+            <td class="mono">$390</td>
+            <td class="mono">0%</td>
+            <td class="mono">$130</td>
+            <td>15th</td>
+            <td>0% — minimums only</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">#8</span></td>
+            <td>Rent Security Dep.</td>
+            <td class="mono">$1,400</td>
+            <td class="mono">0%</td>
+            <td class="mono">$200</td>
+            <td>15th</td>
+            <td>Negotiate pause if moving out</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">#9</span></td>
+            <td>Car Lease</td>
+            <td class="mono">$1,854</td>
+            <td class="mono">0%</td>
+            <td class="mono">$309</td>
+            <td>28th</td>
+            <td>Ends Aug 2026 — ride it out</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-label">High-Interest Debt (26–30%)</div>
+        <div class="card-value text-red mono">$3,280</div>
+        <div class="card-sub">Costing ~$75/mo in interest alone</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Low/No Interest Debt</div>
+        <div class="card-value text-blue mono">$10,534</div>
+        <div class="card-sub">Manageable with scheduled payments</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Min Monthly Debt Payments</div>
+        <div class="card-value text-orange mono">$1,350</div>
+        <div class="card-sub">~44% of your take-home income</div>
+      </div>
+    </div>
+
+    <div class="callout callout-green">
+      <h4>✅ Silver Lining</h4>
+      <p>Your high-interest debt ($3,280) is actually quite manageable. If you can find $500/mo extra (from reduced rent or new income), you can eliminate ALL high-interest debt in 7 months. The 0% debts are on autopilot. Focus fire on the 26–30% APR cards.</p>
+    </div>
+  </div>
+
+  <!-- ============ PROJECTIONS ============ -->
+  <div class="panel" id="projections">
+    <div class="section-title"><div class="icon" style="background: var(--blue-dim);">📊</div> 6-Month Financial Projections</div>
+    
+    <div class="scenario-toggle" id="scenarioToggle">
+      <button class="scenario-btn active" data-scenario="current">Do Nothing</button>
+      <button class="scenario-btn" data-scenario="chrisjob">🎯 Chris Lands Job (Apr)</button>
+      <button class="scenario-btn" data-scenario="chrisplus">🚀 Chris + Websites</button>
+      <button class="scenario-btn" data-scenario="backup">⚠ Backup: Move Out</button>
+    </div>
+
+    <div id="scenarioContent"></div>
+  </div>
+
+  <!-- ============ BUSINESS PLAN ============ -->
+  <div class="panel" id="business">
+    <div class="section-title"><div class="icon" style="background: var(--green-dim);">🚀</div> Business Formation & Revenue Plan</div>
+
+    <div class="callout callout-green" style="margin-bottom: 24px;">
+      <h4>Recommended: Colorado Single-Member LLC</h4>
+      <p>An LLC gives you liability protection (critical for handling business websites/systems), professional credibility for clients, pass-through taxation (no double tax), and it's cheap in Colorado ($50 to file). You can register at the Colorado Secretary of State website. Name suggestion: something like "Zaya Digital Solutions LLC" or "AriuTech LLC" — something that's professional and doesn't box you into one service.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="biz-option">
+        <div class="biz-header">
+          <h4>🌐 Revenue Stream 1: Websites for Small Biz</h4>
+          <span class="badge badge-green">READY NOW</span>
+        </div>
+        <ul class="biz-pros">
+          <li>Your Denver Thyroid Solutions demo proves you can build — that's your portfolio piece</li>
+          <li>Target: nail salons, HVAC, roofing, med spas, dental offices — any local service biz</li>
+          <li>Pricing: $500–$1,500 per site + $50–$100/mo hosting/maintenance</li>
+          <li>Pitch: "I built this for a business like yours. Here's what it looks like. I can do the same for you in 1 week."</li>
+          <li>Chris handles sales calls and follow-ups; you handle builds</li>
+          <li>Volume target: 2–3 sites/month = $1,000–$4,500 revenue</li>
+        </ul>
+      </div>
+
+      <div class="biz-option">
+        <div class="biz-header">
+          <h4>🏥 Revenue Stream 2: PAR Vault / Agency Systems</h4>
+          <span class="badge badge-orange">BUILDING</span>
+        </div>
+        <ul class="biz-pros">
+          <li>Your PAR Vault demo shows the product vision — keep building it</li>
+          <li>Target: small home care agencies (100+ in Colorado alone)</li>
+          <li>Pricing: $200–$500/mo SaaS subscription per agency</li>
+          <li>Start with your current employer as beta/first client</li>
+          <li>Even 5 agency clients = $1,000–$2,500/mo recurring</li>
+          <li>Longer play — focus websites first for quick cash</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>How to Sell Your First Website (Step by Step)</h3>
+      <div style="display: grid; gap: 12px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">1</div>
+          <div><strong>Pick 10 local businesses</strong> that have bad or no websites. Google them. Screenshot their current site (or lack thereof). Nail salons, barbers, cleaners, HVAC — walk down any street in your area.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">2</div>
+          <div><strong>Build a quick mockup page for ONE of them</strong> (like you did for Denver Thyroid Solutions). Takes you 2–3 hours with AI. This is your "free sample." You've already proven you can do this.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">3</div>
+          <div><strong>Walk in or call.</strong> Say: "Hi, I'm Zaya. I build websites for local businesses. I actually made a sample site for your business to show what it could look like — can I show you on my phone? It's totally free, no strings attached." The demo sells itself.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">4</div>
+          <div><strong>Offer a deal they can't refuse:</strong> "$500 for the full site, delivered in 5 days. If you don't love it, you don't pay." Low risk for them. You need the portfolio and testimonials more than the money right now.</div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--accent); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">5</div>
+          <div><strong>After delivery, upsell:</strong> "$50/month and I keep it updated, running, and ranking on Google." This is recurring revenue. 10 clients × $50 = $500/mo passive income.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top: 32px;"><div class="icon" style="background: var(--blue-dim);">🏦</div> Loan & Funding Options</div>
+
+    <div class="callout callout-blue" style="margin-bottom: 20px;">
+      <h4>My Honest Take on Loans</h4>
+      <p>With a 640–687 credit score and negative monthly cash flow, a personal loan will have a high rate (18–25%). Debt consolidation only makes sense if it <em>lowers</em> your rate — otherwise you're just rearranging deck chairs. A student loan (Sallie Mae) for living expenses is risky and adds more debt. Here's what I'd actually explore:</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="sba-card">
+        <h4 class="text-green">✅ SBA Microloan (Recommended)</h4>
+        <p>Up to $50,000 (avg ~$13,000). Lower rates than personal loans (8–13%). Designed for exactly your situation — new small business owners. They also provide business mentoring.</p>
+        <div class="sba-detail"><span>Amount:</span><span>Up to $50K</span></div>
+        <div class="sba-detail"><span>Rate:</span><span>8–13%</span></div>
+        <div class="sba-detail"><span>Term:</span><span>Up to 6 years</span></div>
+        <div class="sba-detail"><span>Best for:</span><span>Your website/AI business startup costs</span></div>
+      </div>
+
+      <div class="sba-card">
+        <h4 class="text-blue">💡 Community Advantage Loan</h4>
+        <p>SBA-backed, through CDFIs (Community Development Financial Institutions). More forgiving credit requirements. Some Colorado CDFIs: Colorado Enterprise Fund, Colorado Lending Source.</p>
+        <div class="sba-detail"><span>Amount:</span><span>Up to $350K</span></div>
+        <div class="sba-detail"><span>Rate:</span><span>~7–11%</span></div>
+        <div class="sba-detail"><span>Best for:</span><span>If/when PAR Vault scales</span></div>
+      </div>
+
+      <div class="sba-card">
+        <h4 class="text-orange">⚠ Bellco Personal Loan</h4>
+        <p>The rep was right — high interest for your credit range. Only consider if you can get under 15% AND use it to consolidate the 27–30% credit card debt. Otherwise, skip it.</p>
+        <div class="sba-detail"><span>Likely rate:</span><span>18–25%</span></div>
+        <div class="sba-detail"><span>Verdict:</span><span>Only if it beats current CC rates</span></div>
+      </div>
+
+      <div class="sba-card">
+        <h4 class="text-purple">📚 Student Loan (Sallie Mae)</h4>
+        <p>Don't use student loans for living expenses — it's a debt trap. Your CSU Global tuition may qualify for federal loans at lower rates. Talk to CSU Global financial aid office first.</p>
+        <div class="sba-detail"><span>Federal rate:</span><span>~6.5% (grad)</span></div>
+        <div class="sba-detail"><span>Sallie Mae:</span><span>Variable, up to 15%+</span></div>
+        <div class="sba-detail"><span>Verdict:</span><span>Federal only, and only for tuition</span></div>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>Recommended Business Structure</h3>
+      <div class="grid-2" style="margin-bottom: 0;">
+        <div>
+          <div class="card-label">Entity Type</div>
+          <div style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Colorado Single-Member LLC</div>
+          <ul class="biz-pros">
+            <li><strong>Cost:</strong> $50 filing fee with CO Secretary of State</li>
+            <li><strong>Liability:</strong> Protects your personal assets</li>
+            <li><strong>Taxes:</strong> Pass-through (reported on your personal 1040)</li>
+            <li><strong>Credibility:</strong> Clients take "LLC" more seriously</li>
+            <li><strong>Banking:</strong> Open a business checking account (Chase, local CU)</li>
+            <li><strong>EIN:</strong> Free from IRS.gov — takes 5 minutes</li>
+          </ul>
+        </div>
+        <div>
+          <div class="card-label">Why Not These?</div>
+          <div style="margin-top: 12px;">
+            <div style="margin-bottom: 12px;">
+              <strong style="color: var(--text3);">Sole Proprietorship</strong>
+              <p style="font-size: 13px; color: var(--text2);">No liability protection. If a client sues over a website, your personal assets are exposed. Not worth the risk.</p>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <strong style="color: var(--text3);">S-Corp</strong>
+              <p style="font-size: 13px; color: var(--text2);">Overkill right now. Makes sense when profit exceeds ~$40K/year to save on self-employment tax. Revisit in 2027.</p>
+            </div>
+            <div>
+              <strong style="color: var(--text3);">Partnership</strong>
+              <p style="font-size: 13px; color: var(--text2);">Don't form a partnership with Chris yet. Keep it as your LLC, pay him as a contractor if he does sales work. Simpler, cleaner.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ACTION PLAN ============ -->
+  <div class="panel" id="action">
+    <div class="section-title"><div class="icon" style="background: var(--accent); color: #000;">⚡</div> Action Plan & Timeline</div>
+
+    <div class="callout callout-orange" style="margin-bottom: 24px;">
+      <h4>This Week's Priorities (Feb 18–24)</h4>
+      <p>You have 10 days until the $2,000 boss loan is due. That's priority #1. Everything else comes after.</p>
+    </div>
+
+    <div id="checklist">
+      <div class="card-label" style="margin-bottom: 12px;">THIS WEEK — Click to check off:</div>
+      
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Talk to boss about the $2,000</strong><span class="sub">Be upfront: "I need 2 more weeks" or negotiate a payment plan. $500/wk for 4 weeks. Honesty preserves the relationship.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Show the Denver Thyroid Solutions site to the actual business</strong><span class="sub">Walk in or call. You already built it — the hard part is done. "I made this for you. If you like it, it's $500."</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Pick 5 more businesses with bad/no websites</strong><span class="sub">Google Maps → search nail salons, HVAC, roofing, cleaning services near you. Screenshot their terrible sites.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Follow up on Chris's referral</strong><span class="sub">He's actively applying — great. Help him prep for the interview. Practice questions together. The referral is your best shot at fixing the income gap fast.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Read your lease agreement — find the early termination clause</strong><span class="sub">Know your options before you need them. Also check if subletting/roommates are allowed. Knowledge = leverage.</span></div>
+      </div>
+
+      <div class="card-label" style="margin: 20px 0 12px;">THIS MONTH (Feb):</div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>File Colorado LLC ($50)</strong><span class="sub">soscolorado.gov → Business → File a document → LLC. Takes 15 minutes online.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Get EIN from IRS (free)</strong><span class="sub">irs.gov/businesses → Apply for an EIN. Instant. You'll need it for business bank account.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Land first paying website client ($500+)</strong><span class="sub">Show 2–3 businesses your demo. Offer the no-risk deal. One yes changes everything.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Call Bellco back — ask specifically about debt consolidation rates</strong><span class="sub">Ask: "What rate can I get to consolidate $3,280 in credit card debt at 27–30% APR?" Only take it if under 15%.</span></div>
+      </div>
+
+      <div class="checklist-item" onclick="this.classList.toggle('checked')">
+        <div class="check-box"></div>
+        <div class="check-text"><strong>Contact Colorado Enterprise Fund about SBA Microloan</strong><span class="sub">coloradoenterprisefund.org — they specifically serve underbanked entrepreneurs in Colorado.</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="section-title"><div class="icon" style="background: var(--purple-dim);">📅</div> 6-Month Roadmap</div>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color: var(--red);"></div>
+          <div class="timeline-month">FEB 2026</div>
+          <div class="timeline-content">
+            <h4 class="text-red">🔥 Survive & Set Up</h4>
+            <p>Resolve boss loan (negotiate extension or payment plan). Show Denver Thyroid site to the business. File LLC + EIN. Chris pushes hard on the referral. Casually mention to landlord that Chris is close to landing a job.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color: var(--orange);"></div>
+          <div class="timeline-month">MAR 2026</div>
+          <div class="timeline-content">
+            <h4 class="text-orange">🎯 First Revenue + Chris Interviews</h4>
+            <p>Land first website client ($500+). Build 2nd demo site for another business. Chris should be interviewing via the referral. Pay off Affirm ($395) if you can — smallest high-interest kill. Consider 3rd bedroom roommate option.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color: var(--green);"></div>
+          <div class="timeline-month">APR 2026</div>
+          <div class="timeline-content">
+            <h4 class="text-green">🎉 The Turning Point</h4>
+            <p><strong>If Chris is hired:</strong> First month with two incomes. Combined ~$5,900. You have a surplus for the first time. Start aggressively paying down the Capital One cards. Breathe.<br><strong>If not:</strong> Activate backup plan — honest conversation with landlord about options (reduced rent, roommate, or amicable move-out).</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color: var(--blue);"></div>
+          <div class="timeline-month">MAY–JUN 2026</div>
+          <div class="timeline-content">
+            <h4 class="text-blue">💪 Debt Destruction Phase</h4>
+            <p>Pay off small Capital One ($212), then attack large Capital One ($1,910) and Discover ($763). Build website client base to 5+ clients with recurring maintenance ($250–$400/mo passive). Start PAR Vault beta with your current agency. Apply to higher-paying remote roles.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot" style="border-color: var(--cyan);"></div>
+          <div class="timeline-month">JUL–AUG 2026</div>
+          <div class="timeline-content">
+            <h4 class="text-cyan">🌟 Breathing Room</h4>
+            <p>Car lease ends August — $309/mo freed up permanently. All high-interest debt should be paid off. Business generating $1K–$2K/mo. Start emergency fund ($500 goal). For the first time in 3 years, you're not just surviving — you're building.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOUSING ============ -->
+  <div class="panel" id="housing">
+    <div class="section-title"><div class="icon" style="background: var(--purple-dim);">🏠</div> Housing Strategy: Your Friend's Townhome</div>
+
+    <div class="callout callout-blue" style="margin-bottom: 20px;">
+      <h4>Your Situation</h4>
+      <p>You're renting a 3BR/3BA townhome from your cousin's girlfriend (a friend) for $2,500/mo on a 2-year lease from Oct 2025. She doesn't know how tight things are, and there's already some tension around money. This needs a careful, honest approach.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="border-color: var(--green);">
+        <div class="card-label">Plan A: Chris Gets Hired → Stay</div>
+        <div class="card-value text-green mono" style="font-size: 22px;">PREFERRED</div>
+        <div class="card-sub" style="margin-top: 12px;">
+          <div style="margin-bottom: 6px;">If Chris lands the referral job by April, combined income covers rent</div>
+          <div style="margin-bottom: 6px;">Household income: ~$5,900/mo vs $5,233 expenses</div>
+          <div style="margin-bottom: 6px;">Surplus: <strong class="text-green">+$659/mo</strong></div>
+          <div>No moving costs, no awkward landlord conversation, friendship preserved</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: var(--orange);">
+        <div class="card-label">Plan B: No Job by April → Have the Talk</div>
+        <div class="card-value text-orange mono" style="font-size: 22px;">BACKUP</div>
+        <div class="card-sub" style="margin-top: 12px;">
+          <div style="margin-bottom: 6px;">If Chris isn't working by mid-April, you can't keep borrowing to survive</div>
+          <div style="margin-bottom: 6px;">Options: negotiate reduced rent ($1,800?), find a roommate for the 3rd bedroom, or give notice to move</div>
+          <div style="margin-bottom: 6px;">Moving to $1,400/mo saves: <strong class="text-green">$1,100/mo</strong></div>
+          <div>Better she hears it from you proactively than from a missed rent check</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-orange" style="margin-bottom: 20px;">
+      <h4>💡 The 3rd Bedroom Option</h4>
+      <p>You have a 3BR townhome. If your lease allows it (check with your friend), renting the 3rd room for $700–$900/month to a roommate immediately reduces your effective rent to $1,600–$1,800. No moving costs, no lease break, and your friend still gets full rent. This could be the bridge you need while Chris job hunts. Worth asking her about.</p>
+    </div>
+
+    <div class="full-card">
+      <h3>Communication Strategy with Your Landlord/Friend</h3>
+      <div style="display: grid; gap: 16px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--blue); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">1</div>
+          <div>
+            <strong>Week of Feb 24 — Plant the Seed (Low-Key)</strong>
+            <div style="font-size: 13px; color: var(--text2); margin-top: 4px;">Casual mention: "Chris is in the final stages for a great job opportunity. Things have been tight with one income but we're working on it." This prepares her without asking for anything.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--blue); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">2</div>
+          <div>
+            <strong>If Chris Gets the Job → No Conversation Needed</strong>
+            <div style="font-size: 13px; color: var(--text2); margin-top: 4px;">Problem solved. Pay rent on time. Catch up on any late payments. Relationship preserved.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--orange); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">3</div>
+          <div>
+            <strong>If No Job by Mid-April → Have the Real Talk</strong>
+            <div style="font-size: 13px; color: var(--text2); margin-top: 4px;">"I value our friendship and this home. I want to be honest — with Chris still looking, I need to explore options. Could we discuss either: (a) a temporary rent reduction for 2–3 months, (b) me finding a roommate for the 3rd room, or (c) an amicable early termination? I'd rather talk to you now than let it become a problem."</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+          <div style="background: var(--green); color: #000; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">★</div>
+          <div>
+            <strong>Key Principle: Proactive honesty protects the friendship</strong>
+            <div style="font-size: 13px; color: var(--text2); margin-top: 4px;">A surprise missed payment destroys trust. An honest conversation builds it. She's more likely to work with you if she feels respected and included in the solution.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-card">
+      <h3>If You Do Need to Move — Target Areas</h3>
+      <div class="grid-2" style="margin-bottom: 0;">
+        <div>
+          <div class="card-label" style="margin-bottom: 8px;">Affordable Areas Near You</div>
+          <div style="font-size: 14px; line-height: 2;">
+            <div>🏘 <strong>Aurora</strong> — 1BR $1,100–$1,400</div>
+            <div>🏘 <strong>Thornton</strong> — 1BR $1,200–$1,500</div>
+            <div>🏘 <strong>Federal Heights</strong> — 1BR $1,000–$1,300</div>
+            <div>🏘 <strong>Westminster</strong> — 1BR $1,200–$1,500</div>
+            <div>🏘 <strong>Northglenn</strong> — 1BR $1,000–$1,300</div>
+          </div>
+        </div>
+        <div>
+          <div class="card-label" style="margin-bottom: 8px;">Monthly Savings Comparison</div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span>Current ($2,500)</span><span class="mono text-red">$0 saved</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: var(--red);"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span>$1,800 apt</span><span class="mono text-orange">$700/mo saved</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 72%; background: var(--orange);"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span>$1,400 apt</span><span class="mono text-green">$1,100/mo saved</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 56%; background: var(--green);"></div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-header"><span>Roommate ($800 share)</span><span class="mono text-green">$1,700/mo saved</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 32%; background: var(--cyan);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Scenario projections
+const scenarios = {
+  current: {
+    title: "Current Path: No Changes",
+    color: "var(--red)",
+    description: "If nothing changes — Chris still unemployed, same rent, no side income — you accumulate ~$2,100 in new debt every month. In 6 months, total debt grows by $12,600. This path leads to missed payments and a painful conversation with your landlord/friend.",
+    months: [
+      { label: "Feb", income: 3092, expenses: 5233, debt: 13814, net: -2141 },
+      { label: "Mar", income: 3092, expenses: 5233, debt: 15955, net: -2141 },
+      { label: "Apr", income: 3092, expenses: 5233, debt: 18096, net: -2141 },
+      { label: "May", income: 3092, expenses: 5233, debt: 20237, net: -2141 },
+      { label: "Jun", income: 3092, expenses: 5233, debt: 22378, net: -2141 },
+      { label: "Jul", income: 3092, expenses: 5233, debt: 24519, net: -2141 },
+    ]
+  },
+  chrisjob: {
+    title: "🎯 Most Likely: Chris Lands Referral Job (April Start)",
+    color: "var(--blue)",
+    description: "Chris gets the $40–50K job via referral. Realistic timeline: interviews in March, starts April. Take-home ~$2,800/mo. Combined household income jumps to ~$5,900. You stay in the townhome. Shortfall flips to a surplus. This is the scenario to fight for.",
+    months: [
+      { label: "Feb", income: 3092, expenses: 5233, debt: 13814, net: -2141, note: "Toughest month — boss loan due" },
+      { label: "Mar", income: 3092, expenses: 5233, debt: 15955, net: -2141, note: "Chris interviewing" },
+      { label: "Apr", income: 5892, expenses: 5233, debt: 15296, net: 659, note: "🎉 Chris starts! First surplus!" },
+      { label: "May", income: 5892, expenses: 5233, debt: 14637, net: 659, note: "Debt going DOWN" },
+      { label: "Jun", income: 5892, expenses: 5233, debt: 13978, net: 659 },
+      { label: "Jul", income: 5892, expenses: 4924, debt: 13010, net: 968, note: "Car lease ends Aug!" },
+    ]
+  },
+  chrisplus: {
+    title: "🚀 Best Case: Chris Works + You Sell Websites",
+    color: "var(--green)",
+    description: "Chris starts in April ($2,800/mo) AND you sell 2 websites/month ($1,000/mo) starting March. Household income: ~$6,900/mo. Surplus of $1,600+/mo. You pay off ALL high-interest debt by July and start building savings. This is the goal.",
+    months: [
+      { label: "Feb", income: 3092, expenses: 5233, debt: 13814, net: -2141, note: "Survive this month" },
+      { label: "Mar", income: 4092, expenses: 5233, debt: 14955, net: -1141, note: "First website sold! -$1K gap" },
+      { label: "Apr", income: 6892, expenses: 5233, debt: 13296, net: 1659, note: "🎉 Chris + websites = surplus!" },
+      { label: "May", income: 6892, expenses: 5233, debt: 11637, net: 1659, note: "Kill Affirm + small Cap One" },
+      { label: "Jun", income: 6892, expenses: 5233, debt: 9978, net: 1659, note: "Attack large Cap One" },
+      { label: "Jul", income: 6892, expenses: 4924, debt: 8010, net: 2268, note: "Car lease ends! $2.2K surplus!" },
+    ]
+  },
+  backup: {
+    title: "⚠ Backup Plan: Chris No Job by April → Move Out",
+    color: "var(--orange)",
+    description: "If the referral doesn't work out and Chris isn't employed by April, you'll need to have the honest conversation with your friend/landlord and move to a $1,400/mo place. She'll understand — better to be upfront than miss rent. Moving costs ~$2K but saves $1,100/mo after.",
+    months: [
+      { label: "Feb", income: 3092, expenses: 5233, debt: 13814, net: -2141 },
+      { label: "Mar", income: 3092, expenses: 5233, debt: 15955, net: -2141, note: "Give landlord notice" },
+      { label: "Apr", income: 3092, expenses: 5733, debt: 20096, net: -2641, note: "Moving costs (~$2K)" },
+      { label: "May", income: 3092, expenses: 4133, debt: 21137, net: -1041, note: "New rent $1,400. Gap halved." },
+      { label: "Jun", income: 3092, expenses: 4133, debt: 22178, net: -1041 },
+      { label: "Jul", income: 3092, expenses: 3824, debt: 22910, net: -732, note: "Car lease ends, gap shrinks" },
+    ]
+  }
+};
+
+function renderScenario(key) {
+  const s = scenarios[key];
+  const container = document.getElementById('scenarioContent');
+  
+  let html = `
+    <div class="callout" style="border-left-color: ${s.color}; background: var(--surface); margin-bottom: 24px;">
+      <h4 style="color: ${s.color};">${s.title}</h4>
+      <p>${s.description}</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Month</th><th>Income</th><th>Expenses</th><th>Net</th><th>Total Debt</th><th>Note</th></tr>
+        </thead>
+        <tbody>`;
+  
+  s.months.forEach(m => {
+    const netColor = m.net >= 0 ? 'text-green' : 'text-red';
+    const netSign = m.net >= 0 ? '+' : '';
+    html += `
+      <tr${m.note ? ' class="highlight-row"' : ''}>
+        <td class="mono">${m.label}</td>
+        <td class="mono text-green">$${m.income.toLocaleString()}</td>
+        <td class="mono text-red">$${m.expenses.toLocaleString()}</td>
+        <td class="mono ${netColor}">${netSign}$${m.net.toLocaleString()}</td>
+        <td class="mono" style="color: ${s.color};">$${m.debt.toLocaleString()}</td>
+        <td style="font-size: 12px; color: var(--text2);">${m.note || ''}</td>
+      </tr>`;
+  });
+  
+  html += `</tbody></table></div>`;
+  
+  // Visual bar comparison
+  const maxDebt = Math.max(...s.months.map(m => m.debt));
+  html += `
+    <div class="full-card" style="margin-top: 20px;">
+      <h3>Debt Trajectory</h3>
+      <div class="bar-chart">`;
+  
+  s.months.forEach(m => {
+    const height = (m.debt / maxDebt) * 170;
+    html += `
+      <div class="bar-group">
+        <div class="bar-value">$${(m.debt/1000).toFixed(1)}k</div>
+        <div class="bar" style="height: ${height}px; background: ${s.color};"></div>
+        <div class="bar-label">${m.label}</div>
+      </div>`;
+  });
+  
+  html += `</div></div>`;
+
+  // Key metrics
+  const firstMonth = s.months[0];
+  const lastMonth = s.months[s.months.length - 1];
+  const debtChange = lastMonth.debt - firstMonth.debt;
+  const debtDir = debtChange > 0 ? '+' : '';
+  const debtColor = debtChange > 0 ? 'text-red' : 'text-green';
+  
+  html += `
+    <div class="grid-3" style="margin-top: 20px;">
+      <div class="card">
+        <div class="card-label">6-Month Debt Change</div>
+        <div class="card-value ${debtColor} mono" style="font-size: 22px;">${debtDir}$${Math.abs(debtChange).toLocaleString()}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">End Debt (Jul 2026)</div>
+        <div class="card-value mono" style="font-size: 22px; color: ${s.color};">$${lastMonth.debt.toLocaleString()}</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Avg Monthly Net</div>
+        <div class="card-value mono ${lastMonth.net >= 0 ? 'text-green' : 'text-red'}" style="font-size: 22px;">$${Math.round(s.months.reduce((a,m) => a + m.net, 0) / s.months.length).toLocaleString()}</div>
+      </div>
+    </div>`;
+  
+  container.innerHTML = html;
+}
+
+// Scenario toggle
+document.querySelectorAll('.scenario-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderScenario(btn.dataset.scenario);
+  });
+});
+
+// Initial render
+renderScenario('current');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaya — Turn It Around: Career + Business Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --surface2: #f3f1ee;
+  --border: #e5e2dc;
+  --text: #1a1a1a;
+  --text2: #5c5c5c;
+  --text3: #999;
+  --ink: #0f0f0f;
+  --red: #c0392b;
+  --red-bg: #fdf0ee;
+  --orange: #d35400;
+  --orange-bg: #fef5ec;
+  --green: #1a7a4c;
+  --green-bg: #eef8f2;
+  --blue: #2563eb;
+  --blue-bg: #eff4ff;
+  --purple: #7c3aed;
+  --purple-bg: #f3f0ff;
+  --gold: #b8860b;
+  --gold-bg: #fdf8ee;
+  --accent: #c0392b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif { font-family: 'Instrument Serif', serif; }
+.mono { font-family: 'Geist Mono', monospace; font-size: 0.9em; }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* HEADER */
+.hero {
+  text-align: center;
+  padding: 48px 0 40px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 48px;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  padding: 12px 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.nav-btn:hover { border-color: var(--ink); color: var(--ink); }
+.nav-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
+
+.section-header {
+  margin-bottom: 32px;
+}
+
+.section-header h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.section-header p {
+  font-size: 15px;
+  color: var(--text2);
+}
+
+/* CARDS */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card p, .card li {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+.card ul { list-style: none; padding: 0; }
+.card ul li { padding: 4px 0 4px 20px; position: relative; }
+.card ul li::before { content: '→'; position: absolute; left: 0; color: var(--text3); }
+
+/* VERDICT */
+.verdict {
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid;
+}
+
+.verdict h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.verdict p { font-size: 14px; line-height: 1.7; }
+
+.verdict-red { background: var(--red-bg); border-color: var(--red); }
+.verdict-red h4 { color: var(--red); }
+.verdict-orange { background: var(--orange-bg); border-color: var(--orange); }
+.verdict-orange h4 { color: var(--orange); }
+.verdict-green { background: var(--green-bg); border-color: var(--green); }
+.verdict-green h4 { color: var(--green); }
+.verdict-blue { background: var(--blue-bg); border-color: var(--blue); }
+.verdict-blue h4 { color: var(--blue); }
+.verdict-purple { background: var(--purple-bg); border-color: var(--purple); }
+.verdict-purple h4 { color: var(--purple); }
+.verdict-gold { background: var(--gold-bg); border-color: var(--gold); }
+.verdict-gold h4 { color: var(--gold); }
+
+/* GRID */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* SCORE */
+.score-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.score-label {
+  font-size: 13px;
+  font-weight: 600;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.score-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width .5s ease;
+}
+
+.score-value {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  width: 40px;
+  text-align: right;
+}
+
+/* TABLE */
+.table-wrap { overflow-x: auto; margin-bottom: 20px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); border-bottom: 2px solid var(--ink); }
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+
+/* STEP LIST */
+.step-list { counter-reset: step; }
+
+.step-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.step-content h4 { font-size: 15px; margin-bottom: 4px; }
+.step-content p { font-size: 13px; color: var(--text2); }
+
+/* BADGE */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.badge-red { background: var(--red-bg); color: var(--red); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+.badge-green { background: var(--green-bg); color: var(--green); }
+.badge-blue { background: var(--blue-bg); color: var(--blue); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 32px 0;
+}
+
+/* CHECKLIST */
+.check-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.check-item:last-child { border-bottom: none; }
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  margin-top: 2px;
+}
+
+.check-item.done .check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check-item.done .check-box::after {
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sub { display: block; font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+/* PRICING CARD */
+.pricing {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--ink);
+  color: #fff;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.pricing h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.pricing .price {
+  font-family: 'Geist Mono', monospace;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.pricing .price span {
+  font-size: 14px;
+  color: var(--text3);
+}
+
+/* COMPARE */
+.compare-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.compare-row:last-child { border-bottom: none; }
+
+.compare-label {
+  width: 200px;
+  padding: 10px 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  background: var(--surface2);
+}
+
+.compare-val {
+  flex: 1;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+/* TIMELINE */
+.month-block {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.month-block h4 {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.month-block h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.month-block ul { list-style: none; padding: 0; }
+.month-block ul li { padding: 3px 0 3px 20px; position: relative; font-size: 14px; color: var(--text2); }
+.month-block ul li::before { content: '•'; position: absolute; left: 4px; color: var(--text3); }
+
+.tag-line {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="hero">
+    <h1 class="serif">Turn It <em>Around</em></h1>
+    <p>An honest career assessment, business blueprint, and improvement roadmap built for where you actually are — not where LinkedIn says you should be.</p>
+  </div>
+
+  <div class="nav" id="nav">
+    <button class="nav-btn active" data-s="honest">Honest Assessment</button>
+    <button class="nav-btn" data-s="job">Job Market Reality</button>
+    <button class="nav-btn" data-s="business">Business Blueprint</button>
+    <button class="nav-btn" data-s="loan">Boss Loan + Funding</button>
+    <button class="nav-btn" data-s="improve">What to Improve</button>
+    <button class="nav-btn" data-s="roadmap">90-Day Roadmap</button>
+  </div>
+
+  <!-- ===== HONEST ASSESSMENT ===== -->
+  <div class="section active" id="honest">
+    <div class="section-header">
+      <h2 class="serif">The Honest Truth</h2>
+      <p>Here's where you actually stand — no sugar-coating, but also no underselling.</p>
+    </div>
+
+    <div class="verdict verdict-red">
+      <h4>Are you ready for an $80K–$100K remote job today?</h4>
+      <p><strong>Not yet. Here's why — and it's fixable.</strong> The salary data is real: implementation specialists average $66K–$91K, with healthcare IT ranging $53K–$88K. The $80K–$100K range exists, but it requires 3–5 years of verifiable professional IT experience, a completed degree, or strong portfolio evidence. You have pieces of each, but gaps in all three. The good news: you're closer than you think, and the path to closing these gaps is 6–12 months, not years.</p>
+    </div>
+
+    <div class="card">
+      <h3>Your Hireability Scorecard</h3>
+      <p style="margin-bottom: 16px;">How hiring managers and ATS systems will evaluate you for $80K–$100K remote roles:</p>
+      
+      <div class="score-bar">
+        <div class="score-label">Portfolio & Projects</div>
+        <div class="score-track"><div class="score-fill" style="width: 75%; background: var(--green);"></div></div>
+        <div class="score-value" style="color: var(--green);">7.5</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Website Quality</div>
+        <div class="score-track"><div class="score-fill" style="width: 80%; background: var(--green);"></div></div>
+        <div class="score-value" style="color: var(--green);">8.0</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Resume Strength</div>
+        <div class="score-track"><div class="score-fill" style="width: 60%; background: var(--orange);"></div></div>
+        <div class="score-value" style="color: var(--orange);">6.0</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Education (on paper)</div>
+        <div class="score-track"><div class="score-fill" style="width: 45%; background: var(--red);"></div></div>
+        <div class="score-value" style="color: var(--red);">4.5</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Professional Experience</div>
+        <div class="score-track"><div class="score-fill" style="width: 50%; background: var(--orange);"></div></div>
+        <div class="score-value" style="color: var(--orange);">5.0</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Technical Depth</div>
+        <div class="score-track"><div class="score-fill" style="width: 55%; background: var(--orange);"></div></div>
+        <div class="score-value" style="color: var(--orange);">5.5</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Unique Value Prop</div>
+        <div class="score-track"><div class="score-fill" style="width: 85%; background: var(--green);"></div></div>
+        <div class="score-value" style="color: var(--green);">8.5</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="border-color: var(--green);">
+        <h3 style="color: var(--green);">✅ What's Working</h3>
+        <ul>
+          <li><strong>ariune.com is impressive.</strong> Clean, professional, unique design system. Better than 90% of junior dev portfolios. The "Modern Steppe Design System" branding is distinctive.</li>
+          <li><strong>PAR Vault is a real product.</strong> Not a tutorial project — it solves an actual business problem you identified at work. This is your single strongest asset.</li>
+          <li><strong>The Denver Thyroid site proves you can deliver.</strong> It's polished, professional, and built for a real business. That's a portfolio AND a sales tool.</li>
+          <li><strong>Trilingual is a genuine differentiator.</strong> English + Mongolian + Japanese is rare and valuable in global ops roles.</li>
+          <li><strong>You think in systems.</strong> The way you identified compliance gaps and built a solution shows product thinking — that's more valuable than code alone.</li>
+          <li><strong>Your AI-augmented workflow is the future.</strong> You're right that technical barriers are lower now. Your edge is knowing WHAT to build, not just HOW.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-color: var(--red);">
+        <h3 style="color: var(--red);">❌ What's Holding You Back (Honest)</h3>
+        <ul>
+          <li><strong>Education gap is the elephant.</strong> B.A. Linguistics → incomplete B.S. MIS → in-progress M.S. = ATS systems flag this. Your resume says "Transitioned to graduate program" which is graceful, but recruiters see through it.</li>
+          <li><strong>Only 5 months in current IT role.</strong> Sep 2025–Present is very fresh. Most $80K+ roles want 2+ years. You need either more time or more proof.</li>
+          <li><strong>Resume oversells title.</strong> "IT Manager" at a small home care agency ≠ IT Manager at a real company in recruiters' eyes. The title inflation can backfire.</li>
+          <li><strong>No external validation.</strong> No certifications, no open-source contributions with stars, no published articles, no conference talks. These signal credibility to strangers.</li>
+          <li><strong>Technical skills are AI-assisted.</strong> You're honest about this — but interviewers WILL test you on fundamentals without AI. Can you explain JWT auth flow on a whiteboard?</li>
+          <li><strong>The 2022–2025 gap.</strong> 3 years at Columbia College with no degree is a red flag that needs a better narrative.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict verdict-gold">
+      <h4>Your Unfair Advantage (that you're undervaluing)</h4>
+      <p>You're not a developer who learned about healthcare. You're an <strong>operations person who builds the tools she needs.</strong> That's a completely different — and more valuable — story. Implementation Specialists, Solutions Engineers, and Healthcare IT Coordinators who can actually BUILD are unicorns. Stop competing in the "junior developer" lane. You lose there. Compete in the "ops person who codes" lane. You WIN there.</p>
+    </div>
+  </div>
+
+  <!-- ===== JOB MARKET REALITY ===== -->
+  <div class="section" id="job">
+    <div class="section-header">
+      <h2 class="serif">Job Market Reality Check</h2>
+      <p>Where you can realistically land — today, in 6 months, and in 12 months.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Role Title</th><th>Salary Range</th><th>Your Fit</th><th>Timeline</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Implementation Specialist</strong><br><span style="font-size:12px;color:var(--text3);">Healthcare SaaS companies</span></td>
+            <td class="mono">$55K–$75K</td>
+            <td><span class="badge badge-green">HIGH FIT</span></td>
+            <td>Now – 3 months</td>
+          </tr>
+          <tr>
+            <td><strong>Healthcare IT Coordinator</strong><br><span style="font-size:12px;color:var(--text3);">Agencies, clinics, health systems</span></td>
+            <td class="mono">$50K–$70K</td>
+            <td><span class="badge badge-green">HIGH FIT</span></td>
+            <td>Now – 3 months</td>
+          </tr>
+          <tr>
+            <td><strong>Solutions Engineer / Pre-Sales</strong><br><span style="font-size:12px;color:var(--text3);">Healthcare tech vendors</span></td>
+            <td class="mono">$70K–$95K</td>
+            <td><span class="badge badge-orange">MODERATE</span></td>
+            <td>3–6 months (need cert)</td>
+          </tr>
+          <tr>
+            <td><strong>Operations Technology Manager</strong><br><span style="font-size:12px;color:var(--text3);">Mid-size home care / hospice</span></td>
+            <td class="mono">$65K–$85K</td>
+            <td><span class="badge badge-green">HIGH FIT</span></td>
+            <td>3–6 months</td>
+          </tr>
+          <tr>
+            <td><strong>Technical Implementation Manager</strong><br><span style="font-size:12px;color:var(--text3);">SaaS companies (remote)</span></td>
+            <td class="mono">$80K–$110K</td>
+            <td><span class="badge badge-orange">STRETCH</span></td>
+            <td>6–12 months</td>
+          </tr>
+          <tr>
+            <td><strong>Product Manager (Healthcare)</strong><br><span style="font-size:12px;color:var(--text3);">Startups, scale-ups</span></td>
+            <td class="mono">$90K–$130K</td>
+            <td><span class="badge badge-red">REACH</span></td>
+            <td>12–18 months</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="verdict verdict-blue">
+      <h4>Realistic Salary Trajectory</h4>
+      <p><strong>Today:</strong> $55K–$70K is your realistic landing zone for a full-time remote role. <strong>In 6 months</strong> (with a cert + more PAR Vault development): $70K–$85K. <strong>In 12 months</strong> (with M.S. progress + client work): $80K–$100K+. The $80K–$100K is real, but it's a 6–12 month target, not a tomorrow target. Even $55K is a massive jump from your current $22/hr ($45K at full-time equivalent).</p>
+    </div>
+
+    <div class="card">
+      <h3>Best-Fit Companies to Target (Remote Healthcare IT)</h3>
+      <p style="margin-bottom: 12px;">These companies hire for roles that match your exact skill intersection — ops + tech + healthcare:</p>
+      <ul>
+        <li><strong>Homecare Homebase</strong> — Home health software, always hiring implementation specialists</li>
+        <li><strong>MatrixCare / ResMed</strong> — Post-acute care software, values ops experience</li>
+        <li><strong>Netsmart Technologies</strong> — Behavioral health + home care EHR, Colorado-friendly</li>
+        <li><strong>WellSky</strong> — Home health + hospice tech, frequent remote openings</li>
+        <li><strong>Axxess</strong> — Home health SaaS, growing fast, values healthcare domain expertise</li>
+        <li><strong>Sandata Technologies</strong> — EVV and home care compliance — your EXACT domain</li>
+        <li><strong>CareAcademy</strong> — Caregiver training platform, your training experience is relevant</li>
+        <li><strong>PointClickCare</strong> — Long-term care, frequently hires implementation roles at $70K+</li>
+      </ul>
+    </div>
+
+    <div class="grid-2">
+      <div class="verdict verdict-green">
+        <h4>Search these exact phrases on LinkedIn/Indeed:</h4>
+        <p>"implementation specialist" "home health" remote<br>
+        "healthcare IT" coordinator remote<br>
+        "operations technology" "home care" remote<br>
+        "solutions specialist" "post-acute" remote<br>
+        "EHR implementation" specialist remote</p>
+      </div>
+      <div class="verdict verdict-purple">
+        <h4>Your Interview Story (Practice This)</h4>
+        <p>"I was running operations at a home care agency and kept hitting compliance gaps that no existing tool solved. So I built one — PAR Vault. I went from identifying the problem to shipping a full-stack platform with HIPAA-aligned security. I'm looking for a role where I can bring that same energy to helping healthcare organizations implement technology that actually works for the people using it."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BUSINESS BLUEPRINT ===== -->
+  <div class="section" id="business">
+    <div class="section-header">
+      <h2 class="serif">Business Blueprint</h2>
+      <p>A detailed, realistic plan for your web development + healthcare systems business.</p>
+    </div>
+
+    <div class="verdict verdict-gold">
+      <h4>Your Core Insight Is Correct</h4>
+      <p>"The technical barrier is minimal with AI — it's not like I'm trading my time/hour doing labor." This is exactly right. You're not selling code. You're selling <strong>the outcome</strong> — a professional web presence, a working compliance system, a business that looks legit online. AI lets you deliver $3,000 worth of value in 4 hours of work. That's a $750/hr effective rate. The skill isn't coding — it's identifying what businesses need and delivering it fast.</p>
+    </div>
+
+    <div class="card" style="border: 2px solid var(--ink);">
+      <h3>Business Entity: Colorado Single-Member LLC</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px;">
+        <div>
+          <p><strong>Name Suggestion:</strong> Ariune Digital LLC or Steppe Digital LLC</p>
+          <p><strong>Filing:</strong> $50 at soscolorado.gov</p>
+          <p><strong>EIN:</strong> Free at irs.gov (instant)</p>
+          <p><strong>Bank:</strong> Chase Business Checking (no min balance)</p>
+        </div>
+        <div>
+          <p><strong>Why LLC not Sole Prop:</strong> Liability protection when handling business websites + PHI</p>
+          <p><strong>Why not S-Corp yet:</strong> Only saves on taxes above ~$40K profit/year</p>
+          <p><strong>Why not partnership w/ Chris:</strong> Keep it clean. Pay him as 1099 contractor for sales.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family: 'Instrument Serif', serif; font-size: 24px; margin-bottom: 20px;">Revenue Stream 1: Website Builds for Local Businesses</h3>
+
+    <div class="grid-2">
+      <div class="pricing">
+        <div class="pricing-badge">Starter Package</div>
+        <h3 class="serif">Landing Page</h3>
+        <div class="price">$500 <span>one-time</span></div>
+        <ul>
+          <li>Single-page responsive site</li>
+          <li>Mobile-optimized</li>
+          <li>Contact form / click-to-call</li>
+          <li>Google Business integration</li>
+          <li>Delivered in 3–5 days</li>
+          <li>+ $50/mo hosting & maintenance</li>
+        </ul>
+        <p style="margin-top: 12px; font-size: 12px; color: var(--text3);">Your time: 3–4 hours with AI | Effective rate: $125–$167/hr</p>
+      </div>
+
+      <div class="pricing">
+        <div class="pricing-badge">Professional</div>
+        <h3 class="serif">Full Website</h3>
+        <div class="price">$1,500 <span>one-time</span></div>
+        <ul>
+          <li>Multi-page site (5–8 pages)</li>
+          <li>SEO basics + Google Analytics</li>
+          <li>Booking/scheduling integration</li>
+          <li>Photo gallery / service pages</li>
+          <li>Delivered in 7–10 days</li>
+          <li>+ $75/mo hosting & maintenance</li>
+        </ul>
+        <p style="margin-top: 12px; font-size: 12px; color: var(--text3);">Your time: 8–12 hours with AI | Effective rate: $125–$188/hr</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Target Clients & Sales Approach</h3>
+      <p style="margin-bottom: 12px;"><strong>Ideal Client:</strong> Local service business with no website, or an ugly/outdated one. They're losing customers to competitors who look more professional online.</p>
+      <ul>
+        <li><strong>Nail salons</strong> — you know this industry personally. Start with your cousin's salon.</li>
+        <li><strong>HVAC / Roofing / Plumbing</strong> — high-ticket services, terrible websites. They'll pay $1,500 without blinking.</li>
+        <li><strong>Med spas / Chiropractors / Dentists</strong> — vanity businesses that care about appearance. Higher budgets ($2K–$3K+).</li>
+        <li><strong>Cleaning services / Pet groomers / Auto detail</strong> — easy builds, grateful clients, good for portfolio.</li>
+      </ul>
+    </div>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>The "Trojan Horse" Sales Method</h4>
+          <p>Build a spec site for a business BEFORE contacting them (like you did for Denver Thyroid). Walk in, show it on your phone. "I made this for you — if you like it, it's $500. If not, no hard feelings." The demo does the selling. You remove all risk from the buyer.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Chris's Role: The Closer</h4>
+          <p>You build the demos. Chris walks into businesses and presents them. His sales experience and communication skills are perfect for this. Pay him 20% commission on closed deals ($100–$300 per sale). He's motivated, you stay focused on building.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>The Maintenance Upsell</h4>
+          <p>Every site comes with a $50–$75/mo maintenance offer. "I keep it updated, running, and ranking on Google." This is recurring revenue. 10 clients × $50 = $500/mo that comes in whether you work or not. THIS is how you escape the hamster wheel — passive income from maintenance contracts.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Revenue Targets</h4>
+          <p><strong>Month 1:</strong> 1 site ($500) + cousin's salon (free/discounted for testimonial). <strong>Month 2–3:</strong> 2–3 sites/mo ($1,000–$4,500). <strong>Month 4–6:</strong> 3–4 sites/mo + 5–10 maintenance clients ($2,000–$6,000 + $250–$750 recurring). <strong>Year 1 target:</strong> $20,000–$40,000 in website revenue + $3,000–$9,000 in recurring maintenance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family: 'Instrument Serif', serif; font-size: 24px; margin-bottom: 20px;">Revenue Stream 2: PAR Vault (Healthcare SaaS)</h3>
+
+    <div class="verdict verdict-purple">
+      <h4>The Longer Play — But the Bigger One</h4>
+      <p>PAR Vault has potential to be a $10K–$50K+/month SaaS business. But it needs more development, HIPAA compliance certification, and a pilot client. Don't rush this. Let the website business fund your life while you build PAR Vault on the side. Target: beta launch with your current agency by Q3 2026.</p>
+    </div>
+
+    <div class="card">
+      <h3>PAR Vault Business Model</h3>
+      <div class="grid-2" style="margin: 12px 0 0;">
+        <div>
+          <p><strong>Target:</strong> Small home care agencies (5–50 caregivers)</p>
+          <p><strong>Pricing:</strong> $200–$500/mo per agency</p>
+          <p><strong>Market:</strong> 100+ small agencies in Colorado alone</p>
+          <p><strong>Moat:</strong> You understand the ops pain because you LIVE it</p>
+        </div>
+        <div>
+          <p><strong>Phase 1:</strong> Beta with your employer (free/discounted)</p>
+          <p><strong>Phase 2:</strong> 3–5 paying pilot clients in CO</p>
+          <p><strong>Phase 3:</strong> Scale to 20+ agencies = $4K–$10K/mo</p>
+          <p><strong>Timeline:</strong> 6–12 months to first paid client</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Year 1 Combined Revenue Projection</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quarter</th><th>Website Revenue</th><th>Maintenance MRR</th><th>PAR Vault</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>Q1 (Mar–May)</td><td class="mono">$2,000–$4,000</td><td class="mono">$100–$200</td><td class="mono">$0</td><td class="mono" style="font-weight:700;">$2,100–$4,200</td></tr>
+            <tr><td>Q2 (Jun–Aug)</td><td class="mono">$4,500–$9,000</td><td class="mono">$300–$600</td><td class="mono">$0</td><td class="mono" style="font-weight:700;">$4,800–$9,600</td></tr>
+            <tr><td>Q3 (Sep–Nov)</td><td class="mono">$6,000–$12,000</td><td class="mono">$500–$1,000</td><td class="mono">$200–$500</td><td class="mono" style="font-weight:700;">$6,700–$13,500</td></tr>
+            <tr><td>Q4 (Dec–Feb '27)</td><td class="mono">$6,000–$12,000</td><td class="mono">$750–$1,500</td><td class="mono">$600–$2,000</td><td class="mono" style="font-weight:700;">$7,350–$15,500</td></tr>
+            <tr style="background: var(--surface2); font-weight: 700;"><td><strong>Year 1 Total</strong></td><td class="mono">$18,500–$37,000</td><td class="mono">$1,650–$3,300</td><td class="mono">$800–$2,500</td><td class="mono" style="color: var(--green); font-size: 16px;">$20,950–$42,800</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size: 12px; color: var(--text3);">Conservative to moderate estimates. Does not include your day job income. Combined with a $55K+ salary, total household income could reach $75K–$100K+ in Year 1.</p>
+    </div>
+  </div>
+
+  <!-- ===== LOAN + BOSS ===== -->
+  <div class="section" id="loan">
+    <div class="section-header">
+      <h2 class="serif">Boss Loan & Funding Strategy</h2>
+      <p>Solving the immediate crisis AND building long-term funding.</p>
+    </div>
+
+    <div class="verdict verdict-red">
+      <h4>The $2,000 Boss Loan — Priority #1</h4>
+      <p>You're right to take this seriously. Your professional reputation is worth more than $2,000. Here are your options ranked from best to worst:</p>
+    </div>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="background: var(--green);">A</div>
+        <div class="step-content">
+          <h4>Option A: Negotiate a Payment Plan with Your Boss</h4>
+          <p>Before borrowing to repay, try this first. Say: "I absolutely intend to pay you back. Would it be possible to do $500/week over the next 4 weeks instead of the full amount on the 28th? I want to make sure I don't miss any of my other obligations." Most reasonable bosses will agree. It shows responsibility, not weakness. <strong>Cost: $0.</strong></p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background: var(--blue);">B</div>
+        <div class="step-content">
+          <h4>Option B: Paycheck Advance / Earned Wage Access App</h4>
+          <p>Apps like Earnin, Dave, or DailyPay let you access wages you've already earned. Typically $100–$500 per pay period with minimal fees ($1–$5). Won't cover the full $2K but can cover $500–$1,000 of it. <strong>Combine with Option A.</strong></p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background: var(--orange);">C</div>
+        <div class="step-content">
+          <h4>Option C: Bellco Credit Union Personal Loan</h4>
+          <p>You're already pre-approved. For $2,000, even at 18% APR, your monthly payment would be ~$100 for 24 months. Total interest: ~$380. It's not ideal but it solves the immediate problem and protects your reputation. <strong>Only take this if Options A and B don't cover it.</strong> Ask specifically for a small personal loan or line of credit, NOT a large consolidation loan.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background: var(--red);">D</div>
+        <div class="step-content">
+          <h4>Option D: Cash Advance from Credit Card</h4>
+          <p><strong>AVOID THIS.</strong> Your cards are at 27–30% APR and cash advances often have additional fees (3–5%) plus higher rates. This makes your situation worse. Only consider as absolute last resort.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict verdict-green">
+      <h4>My Recommendation</h4>
+      <p><strong>Try Option A first (this week).</strong> If your boss says no to a payment plan, combine Option B (advance $500–$1,000 from earned wages) with the Bellco small loan for the remainder. The total cost of the Bellco loan for $1,000–$2,000 is manageable — $20–$40/month — and it protects the most important asset you have at work: trust.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3 style="font-family: 'Instrument Serif', serif; font-size: 24px; margin-bottom: 20px;">Business Funding: SBA Microloan</h3>
+
+    <div class="card">
+      <h3>SBA Microloan — Your Best Business Funding Option</h3>
+      <p style="margin-bottom: 12px;">The SBA Microloan program is designed for exactly your situation — new entrepreneurs who can't get traditional bank loans. Key facts:</p>
+      <ul>
+        <li><strong>Amount:</strong> Up to $50,000 (average ~$13,000)</li>
+        <li><strong>Rate:</strong> 8–13% (way better than your credit cards)</li>
+        <li><strong>Term:</strong> Up to 6 years</li>
+        <li><strong>Credit:</strong> More relaxed standards than banks — your 640–687 scores can work</li>
+        <li><strong>Bonus:</strong> Many intermediaries provide free business mentoring and training</li>
+        <li><strong>Cannot be used for:</strong> Paying existing personal debts or buying real estate</li>
+        <li><strong>CAN be used for:</strong> Equipment, software, marketing, working capital for your business</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Colorado-Specific Microlenders to Contact</h3>
+      <ul>
+        <li><strong>CEDS Finance</strong> — Denver metro area, specifically serves immigrants and underserved communities. Microloans up to $100K. They provide one-on-one business consulting. <em>This is the best fit for you.</em></li>
+        <li><strong>Energize Colorado</strong> — energizecolorado.com — Low-interest loans with business mentoring. Focus on underserved communities.</li>
+        <li><strong>Colorado Enterprise Fund</strong> — Statewide, works with SBA. Loans $5K–$250K. Free business mentoring included.</li>
+        <li><strong>Colorado Lending Source</strong> — SBA preferred lender, multiple programs.</li>
+        <li><strong>Colorado Startup Loan Fund</strong> — Through OEDIT (state program). Microloans under $150K for startups. Applications reopening Q2 2026.</li>
+      </ul>
+    </div>
+
+    <div class="verdict verdict-blue">
+      <h4>What You'd Need for a $5,000–$10,000 SBA Microloan Application</h4>
+      <p>A simple business plan (1–2 pages), your personal tax returns, a profit & loss projection, your credit report, and a personal guarantee. The intermediary will help you prepare these. <strong>Action: Contact CEDS Finance this week.</strong> Even if you don't apply immediately, their free business consulting is invaluable for your stage.</p>
+    </div>
+
+    <div class="verdict verdict-orange">
+      <h4>On Debt Consolidation & Sallie Mae</h4>
+      <p><strong>Debt consolidation:</strong> Only makes sense if the new rate is under 15%. Ask Bellco: "What rate for consolidating $3,280 in credit card debt?" If they say 18%+ — decline.<br><br><strong>Sallie Mae:</strong> Don't do it. Private student loans at variable rates are a trap. Instead, contact CSU Global's financial aid office about federal grad PLUS loans (~6.5% fixed). Use ONLY for tuition, never living expenses. Federal loans have income-driven repayment and forgiveness options that Sallie Mae doesn't.</p>
+    </div>
+  </div>
+
+  <!-- ===== WHAT TO IMPROVE ===== -->
+  <div class="section" id="improve">
+    <div class="section-header">
+      <h2 class="serif">What to Fix & Improve</h2>
+      <p>Specific, actionable improvements to your resume, portfolio, and profile.</p>
+    </div>
+
+    <div class="card">
+      <h3>Resume Fixes (Do This Week)</h3>
+      <div style="margin-top: 8px;">
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Change title from "IT Manager" to "Operations & Systems Coordinator"</strong><span class="sub">IT Manager at a small agency sounds inflated. Ops & Systems Coordinator sounds accurate and impressive. It's what you actually DO.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Reframe education honestly</strong><span class="sub">Instead of "Transitioned to graduate program," use: "B.S. MIS (Coursework, 90+ credits completed) — Applied directly to M.S. program at CSU Global." Shows progression, not failure.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Add metrics everywhere</strong><span class="sub">"Reduced paperwork processing time by 60%" is great. Add more: "Managed compliance tracking for X caregivers." "Onboarded X employees using new digital system." Numbers make you real.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Add a "Selected Project" section with PAR Vault details</strong><span class="sub">Include: problem statement, tech stack, impact metrics, link to demo. This is your strongest differentiator — give it more space.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Remove "AI-assisted development: leveraged Claude" from resume</strong><span class="sub">Everyone uses AI now. Putting it on the resume signals insecurity about your technical ability. Just list what you built and the tech used. Let interviewers discover your AI fluency in conversation — it's a positive surprise, not a disclaimer.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Portfolio Site Fixes (ariune.com)</h3>
+      <div style="margin-top: 8px;">
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Add a "Case Studies" section with before/after</strong><span class="sub">Show the Denver Thyroid site as a case study: "Client had no web presence → built a professional site in 48 hours → [screenshot]." This sells your BUSINESS services, not just your dev skills.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Make PAR Vault demo interactive</strong><span class="sub">The current demo shows screenshots. Add a video walkthrough or a clickable prototype. Recruiters spend 30 seconds on a portfolio — make those 30 seconds count.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Add a clear "Hire Me" or "Services" page</strong><span class="sub">Right now your site serves two audiences (employers AND clients) but speaks mostly to employers. Add a separate "Services" page for your website business. This is also where you'd send potential web clients.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Fix the "Built with the Modern Steppe Design System" footer</strong><span class="sub">Cool branding, but a recruiter doesn't know what this is. Add a small tooltip or make it link to an explanation. Otherwise it's confusing.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Get These Certifications (Priority Order)</h3>
+      <p style="margin-bottom: 12px;">Certs fill the gap between your incomplete degree and your in-progress master's. They tell recruiters "this person is legit" without requiring 4 years of school.</p>
+      <div style="margin-top: 8px;">
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>CompTIA Project+ ($358) or Google Project Management Cert (free on Coursera)</strong><span class="sub">Priority #1. Implementation roles love this. Google cert is free and respected. Takes 2–4 weeks part-time. Do this NOW.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>HIPAA Privacy & Security Certification (~$50–$100 online)</strong><span class="sub">You already know HIPAA from work. Getting certified takes a few hours and immediately validates your healthcare IT credibility. Do this by March.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>AWS Cloud Practitioner ($100) — by May 2026</strong><span class="sub">The most recognized entry cloud cert. Validates your PAR Vault deployment knowledge. Most healthcare IT roles now mention cloud. Study 2 weeks, pass.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>LinkedIn Optimization</h3>
+      <div style="margin-top: 8px;">
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Headline: "Operations → Technology Bridge | Healthcare IT | Built PAR Vault"</strong><span class="sub">Not "IT Manager." Your bridge identity is unique. Lead with it.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Post 1–2x/week about healthcare IT, process improvement, or building with AI</strong><span class="sub">Even simple posts like "3 compliance problems I solved this week at my home care agency" build credibility. Recruiters check LinkedIn. Give them something to see.</span></div>
+        </div>
+        <div class="check-item" onclick="this.classList.toggle('done')">
+          <div class="check-box"></div>
+          <div><strong>Connect with 20 people at the target companies listed above</strong><span class="sub">Not random — specific people in implementation, product, or ops roles at Homecare Homebase, WellSky, Netsmart, etc. Send a personalized note.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict verdict-green">
+      <h4>The Education Narrative — Own It</h4>
+      <p>Stop being insecure about Columbia College. Here's your narrative: "I started a B.S. in MIS and realized I could accelerate my career by going directly into a master's program at CSU Global. I'm combining hands-on industry experience with academic rigor — I don't just study IT management, I practice it daily by building production systems." This is honest, forward-looking, and reframes the "gap" as a strategic decision. Practice saying this out loud until it feels natural.</p>
+    </div>
+  </div>
+
+  <!-- ===== 90-DAY ROADMAP ===== -->
+  <div class="section" id="roadmap">
+    <div class="section-header">
+      <h2 class="serif">90-Day Roadmap</h2>
+      <p>Week-by-week actions to go from survival mode to building mode.</p>
+    </div>
+
+    <div class="month-block" style="border-left: 4px solid var(--red);">
+      <h4>WEEKS 1–2 · FEB 19 – MAR 4</h4>
+      <h3 style="color: var(--red);">🔥 Triage & Setup</h3>
+      <ul>
+        <li><strong>Resolve boss loan</strong> — negotiate payment plan, or apply for Bellco small loan</li>
+        <li><strong>File Colorado LLC</strong> ($50, 15 min online at soscolorado.gov)</li>
+        <li><strong>Get EIN</strong> from IRS.gov (free, instant)</li>
+        <li><strong>Show Denver Thyroid site to the actual business</strong> — walk in or call</li>
+        <li><strong>Start Google Project Management Certificate</strong> on Coursera (free)</li>
+        <li><strong>Support Chris on the referral follow-up</strong> — help him prep for interviews</li>
+        <li><strong>Contact CEDS Finance</strong> about free business consulting + microloan info</li>
+      </ul>
+      <div class="tag-line">
+        <span style="color: var(--red);">Survive</span>
+        <span>Target income: $3,092 (current only)</span>
+      </div>
+    </div>
+
+    <div class="month-block" style="border-left: 4px solid var(--orange);">
+      <h4>WEEKS 3–4 · MAR 5 – MAR 18</h4>
+      <h3 style="color: var(--orange);">🏗 First Revenue</h3>
+      <ul>
+        <li><strong>Build 2 more spec websites</strong> for local businesses (your choice of targets)</li>
+        <li><strong>Chris pitches 5 businesses</strong> with your demos</li>
+        <li><strong>Close first paying client</strong> ($500+)</li>
+        <li><strong>Open business bank account</strong> (Chase Business Checking or local CU)</li>
+        <li><strong>Get HIPAA certification online</strong> (~$50, takes a few hours)</li>
+        <li><strong>Apply to 5 remote Implementation Specialist roles</strong> at target companies</li>
+        <li><strong>Add case study to ariune.com</strong> for Denver Thyroid or first client</li>
+      </ul>
+      <div class="tag-line">
+        <span style="color: var(--orange);">Build</span>
+        <span>Target income: $3,592 (+$500 website)</span>
+      </div>
+    </div>
+
+    <div class="month-block" style="border-left: 4px solid var(--blue);">
+      <h4>WEEKS 5–8 · MAR 19 – APR 15</h4>
+      <h3 style="color: var(--blue);">📈 Scale & Apply</h3>
+      <ul>
+        <li><strong>Sell 2–3 more websites</strong> ($1,000–$4,500)</li>
+        <li><strong>Chris lands job</strong> (hopeful — referral timeline)</li>
+        <li><strong>Complete Google PM Certificate</strong> — add to resume + LinkedIn</li>
+        <li><strong>Apply to 10+ remote roles</strong> — customize resume for each (ask me to help)</li>
+        <li><strong>Sign first maintenance client</strong> ($50–$75/mo recurring)</li>
+        <li><strong>If Chris not hired:</strong> have the honest conversation with your landlord about options</li>
+        <li><strong>Continue M.S. coursework</strong> — don't let school slip</li>
+      </ul>
+      <div class="tag-line">
+        <span style="color: var(--blue);">Gain momentum</span>
+        <span>Target income: $4,092–$7,092</span>
+      </div>
+    </div>
+
+    <div class="month-block" style="border-left: 4px solid var(--green);">
+      <h4>WEEKS 9–12 · APR 16 – MAY 15</h4>
+      <h3 style="color: var(--green);">💪 Stabilize</h3>
+      <ul>
+        <li><strong>With Chris working:</strong> Combined income covers all expenses. Start paying down high-interest debt aggressively — Affirm ($395) and small Capital One ($212) first</li>
+        <li><strong>Website business generating $1K–$2K/mo</strong> consistently</li>
+        <li><strong>3–5 maintenance clients</strong> = $150–$375/mo recurring</li>
+        <li><strong>Start AWS Cloud Practitioner study</strong></li>
+        <li><strong>Interview for $60K–$75K roles</strong> with your new cert + portfolio</li>
+        <li><strong>Begin PAR Vault beta prep</strong> with your agency</li>
+        <li><strong>Pay off first credit card completely</strong></li>
+      </ul>
+      <div class="tag-line">
+        <span style="color: var(--green);">Breathe</span>
+        <span>Target household income: $6,000–$8,000/mo</span>
+      </div>
+    </div>
+
+    <div class="verdict verdict-green">
+      <h4>Where You'll Be in 90 Days</h4>
+      <p>If you execute this plan: LLC formed, first paying clients, Google PM certified, HIPAA certified, 3–5 maintenance clients generating passive income, applied to 15+ roles, Chris employed, high-interest debt going down, and a clear path to $80K+ within the year. That's not a dream — that's a plan with specific weekly actions. You've been in survival mode for 3 years. In 90 days, you'll be in building mode. The skills are already there. The portfolio proves it. Now execute.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.s).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
